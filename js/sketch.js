@@ -16,14 +16,14 @@ function setup() {
   // ---> directions on finding config below
 
   // paste your config file here
-  let config = {
-    apiKey: "AIzaSyCk2XQiRWwgHm9hLlPJRzlwElwdjRvk8T0",
-    authDomain: "message-in-a-bottle-12bbb.firebaseapp.com",
-    databaseURL: "https://message-in-a-bottle-12bbb.firebaseio.com",
-    projectId: "message-in-a-bottle-12bbb",
-    storageBucket: "message-in-a-bottle-12bbb.appspot.com",
-    messagingSenderId: "385402809193",
-    appId: "1:385402809193:web:4fc099d64b70b923b96bf8"
+  // let config = {
+  //   apiKey: "AIzaSyCk2XQiRWwgHm9hLlPJRzlwElwdjRvk8T0",
+  //   authDomain: "message-in-a-bottle-12bbb.firebaseapp.com",
+  //   databaseURL: "https://message-in-a-bottle-12bbb.firebaseio.com",
+  //   projectId: "message-in-a-bottle-12bbb",
+  //   storageBucket: "message-in-a-bottle-12bbb.appspot.com",
+  //   messagingSenderId: "385402809193",
+  //   appId: "1:385402809193:web:4fc099d64b70b923b96bf8"
   };
 
   firebase.initializeApp(config);
