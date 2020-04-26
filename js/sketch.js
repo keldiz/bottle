@@ -15,7 +15,7 @@ let receiveDiv, sendDiv;
 function setup() {
 
   noCanvas();
-//access DOM elements
+  //access DOM elements
   //messageInput = select("#messageInput");
   messageInput = document.querySelector("#messageInput");
   sendMessageBtn = document.querySelector("#sendMessageBtn");
@@ -82,11 +82,12 @@ function sendMessage() {
     nodeData = {
       messageText: messageInput.value,
       timestamp: timestamp,
+      received: false,
     }
 
     createNode(folderName, timestamp, nodeData);
 
-    createP(`sent message: + ${nodeData.messageText}`);
+    //createP(`sent message: + ${nodeData.messageText}`);
 
     //zero out text area
     messageInput.value = ''
@@ -95,8 +96,20 @@ function sendMessage() {
     alert("type message first ")
   }
 }
-function receiveMessage(){
 
-console.log("received");
+function receiveMessage() {
 
+  for (let i = 0; i < fbDataArray.length; i++) {
+    if (fbDataArray[i].received === false) {
+      console.log("received message");
+      console.log(fbDataArray[0].messageText);
+
+      //updateNode(folderName, _nodeID, _updateObject);
+      
+      break;
+
+    } else {
+      console.log("no more messages at the sea");
+    }
+  }
 }
