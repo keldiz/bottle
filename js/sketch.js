@@ -9,6 +9,7 @@ let folderName = "messages"; // name of folder you create in db
 let messageInput;
 let sendMessageBtn;
 let receiveMessageBtn;
+let sendAgainBtn;
 let receivedMessage;
 let receiveDiv, sendDiv;
 
@@ -20,7 +21,8 @@ function setup() {
   messageInput = document.querySelector("#messageInput");
   sendMessageBtn = document.querySelector("#sendMessageBtn");
   receiveMessageBtn = document.querySelector("#receiveMessageBtn");
-  receivedMessage = document.querySelector("#receivedMessageBtn");
+  receivedMessage = document.querySelector("#receivedMessage");
+  sendAgainBtn = document.querySelector("#sendAgainBtn");
   receiveDiv = document.querySelector("#receiveDiv");
   sendDiv = document.querySelector("#sendDiv");
 
@@ -29,6 +31,7 @@ function setup() {
 
   sendMessageBtn.addEventListener('click', sendMessage);
   receiveMessageBtn.addEventListener('click', receiveMessage);
+  sendAgainBtn.addEventListener('click', sendAgain);
 
   // Initialize firebase
   // support for Firebase Realtime Database 4 web here: https://firebase.google.com/docs/database/web/start
@@ -85,12 +88,18 @@ function sendMessage() {
       received: false,
     }
 
+    //push to firebase
     createNode(folderName, timestamp, nodeData);
 
     //createP(`sent message: + ${nodeData.messageText}`);
 
     //zero out text area
     messageInput.value = ''
+
+    sendDiv.style.display = 'none';
+    receiveDiv.style.display = 'block';
+
+
 
   } else {
     alert("type message first ")
@@ -101,15 +110,28 @@ function receiveMessage() {
 
   for (let i = 0; i < fbDataArray.length; i++) {
     if (fbDataArray[i].received === false) {
-      console.log("received message");
-      console.log(fbDataArray[0].messageText);
+      // console.log("received message");
+      // console.log(fbDataArray[i].messageText);
 
-      //updateNode(folderName, _nodeID, _updateObject);
-      
+      receivedMessage.innerHTML = fbDataArray[i].messageText;
+
+      updateNode(folderName, fbDataArray[i].timestamp, {
+        received: true
+      });
+
+      receiveMessageBtn.style.display = 'none';
+      sendAgainBtn.style.display = 'block';
+
       break;
 
     } else {
-      console.log("no more messages at the sea");
+      receivedMessage.innerHTML = "no more messages";
+      //console.log("no more messages");
     }
   }
+}
+
+function sendAgain() {
+  receiveDiv.style.display = 'none';
+  sendDiv.style.display = 'block';
 }
