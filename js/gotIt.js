@@ -2,6 +2,9 @@
 
 function gotData(data) {
 
+//seed array (uncomment oninitializing database only)
+// seedDatabase (fortunes);
+
   // need to retrieve firebase data with val() method
   // this returns an object of all data
   fbData = data.val();
@@ -29,18 +32,16 @@ function errData(err) {
   console.log(err);
 
 }
+
+
 // create a new node
 // the node folder name, id, and object are all passed in as parameters
-
 function createNode(_nodeFolder, _nodeId, _nodeObject) {
   firebase.database().ref(_nodeFolder + '/' + _nodeId).set(_nodeObject );
 }
 
-// createNode(folderName, "test", {text:"hello"});
-
 
 // the update method will update an existing node
-
 function updateNode(_nodeFolder, _nodeID, _updateObject) {
 firebase.database().ref(_nodeFolder + '/' + _nodeID).update(_updateObject);
 // this will update existing key:value pair(s) OR add new ones to your object
@@ -51,7 +52,24 @@ firebase.database().ref(_nodeFolder + '/' + _nodeID).update(_updateObject);
 }
 
 // And this removes an entire node from your folder
-
 function deleteNode(_nodeFolder, _nodeID) {
 firebase.database().ref(_nodeFolder + '/' + _nodeID).remove();
+}
+
+function seedDatabase(_array) {
+
+_array.forEach(function (item)
+
+
+
+  let timestamp = Date.now();
+
+  nodeData = {
+    messageText: item,
+    timestamp: timestamp,
+    received: false,
+  }
+
+  //push to firebase
+  createNode(folderName, timestamp, nodeData);
 }
