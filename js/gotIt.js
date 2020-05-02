@@ -58,18 +58,21 @@ firebase.database().ref(_nodeFolder + '/' + _nodeID).remove();
 
 function seedDatabase(_array) {
 
-_array.forEach(function (item)
+  _array.forEach(function(item) {
+    // first, assign timestamp for the message
+    // we will use this both for the message ID and include it in the message object itself
+    // *** this is a little redundant but helps when we update the message values
+    let timestamp = Date.now(); // milliseconds since midnight of January 1, 1970 (beginning of time ;)
 
+    // first, create object of messageData
+    nodeData = {
+      messageText: item,
+      timestamp: timestamp,
+      received: false,
+    }
 
+    // push to firebase!!!
+    createNode(folderName, timestamp, nodeData);
+  })
 
-  let timestamp = Date.now();
-
-  nodeData = {
-    messageText: item,
-    timestamp: timestamp,
-    received: false,
-  }
-
-  //push to firebase
-  createNode(folderName, timestamp, nodeData);
 }

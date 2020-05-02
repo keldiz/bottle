@@ -1,8 +1,8 @@
 let fortunes = [
 "Pull out any not-yet-used holiday gifts",
-"Play “jump the river”,
-// "Make a timeline
-// Read a good book
+"Play 'jump the river'",
+"Make a timeline",
+"Read a good book",
 // Join Audible and listen to books together
 // Research your Family Tree
 // Have an indoor campout
